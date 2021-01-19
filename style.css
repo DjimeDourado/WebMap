@@ -508,14 +508,14 @@ span {
 	font-size: 12px;
 }
 
-.webmap-box {
+webmap .webmap-box {
   position: relative;
   width: 100%;
   overflow: hidden;
   padding-top: 55%; /* 16:9 Aspect Ratio */
 }
 
-.responsive-iframe {
+#webmap .responsive-iframe {
 	position: absolute;
 	padding: 0;
 	top: 0;
