@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,300&display=swap" rel="stylesheet">
@@ -24,15 +24,15 @@
             width: 100%;
             height: 100%;
             padding: 0;
-            margin: 0;
+            margin: 0;            
         }
+
         </style>
         <title>Fluxos de Alunos em Coimbra</title>
     </head>
     <body>
         <div id="map">
         </div>
-        <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet-svg-shape-markers.min.js"></script>
@@ -51,34 +51,32 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/wNumb.js"></script>
         <script src="data/Freguesia_4.js"></script>
-        <script src="data/Closters_5.js"></script>
+        <script src="data/Clostersdealunos_5.js"></script>
         <script src="data/Fluxos_6.js"></script>
         <script src="data/Alunos_7.js"></script>
-        <script src="data/Escolas_8.js"></script>
+        <script src="data/Agrupamentodeescolas_8.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
             highlightLayer = e.target;
 
-            if (e.target.feature.geometry.type === 'LineString') {
+            if (e.target.feature.geometry.type === 'Line') {
               highlightLayer.setStyle({
-                color: '#ffff00',
+                color: '#000000',
               });
             } else {
               highlightLayer.setStyle({
-                fillColor: '#ffff00',
-                fillOpacity: 1
+                fillColor: '#000000',
+                fillOpacity: 10
               });
             }
         }
-       
-
         var map = L.map('map', {
-            zoomControl:true, maxZoom:18, minZoom:8
-        }).fitBounds([[40.11418409676285,-8.588417690122355],[40.34012205231503,-8.245116082601427]]);
+            zoomControl:true, maxZoom:20, minZoom:8
+        }).fitBounds([[40.1597752,-8.57100],[40.300394361962134,-8.342146435359098]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
-        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>&middot; <a href="https://djimedourado.github.io/WebMap/index.html">DjimeDourado</a>');
+        var autolinker = new Autolinker({truncate: {length: 60, location: 'smart'}});
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
@@ -95,46 +93,10 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_DarkMatter_0');
-        map.getPane('pane_DarkMatter_0').style.zIndex = 4;
-        var layer_DarkMatter_0 = L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-            pane: 'pane_DarkMatter_0',
-            opacity: 1.0,
-            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0.</a>',
-            minZoom: 8,
-            maxZoom: 18,
-            minNativeZoom: 0,
-            maxNativeZoom: 20
-        });
-        layer_DarkMatter_0;
-        map.createPane('pane_GoogleHybrid_1');
-        map.getPane('pane_GoogleHybrid_1').style.zIndex = 5;
-        var layer_GoogleHybrid_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleHybrid_1',
-            opacity: 1.0,
-            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Google</a>',
-            minZoom: 8,
-            maxZoom: 18,
-            minNativeZoom: 0,
-            maxNativeZoom: 20
-        });
-        layer_GoogleHybrid_1;
-        map.createPane('pane_GoogleRoad_2');
-        map.getPane('pane_GoogleRoad_2').style.zIndex = 6;
-        var layer_GoogleRoad_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleRoad_2',
-            opacity: 1.0,
-            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Google</a>',
-            minZoom: 8,
-            maxZoom: 18,
-            minNativeZoom: 0,
-            maxNativeZoom: 20
-        });
-        layer_GoogleRoad_2;
-        map.createPane('pane_ESRITopo_3');
-        map.getPane('pane_ESRITopo_3').style.zIndex = 7;
-        var layer_ESRITopo_3 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-            pane: 'pane_ESRITopo_3',
+        map.createPane('pane_ESRITopo_0');
+        map.getPane('pane_ESRITopo_0').style.zIndex = 4;
+        var layer_ESRITopo_0 = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_ESRITopo_0',
             opacity: 1.0,
             attribution: '',
             minZoom: 8,
@@ -142,8 +104,44 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_ESRITopo_3;
-        map.addLayer(layer_ESRITopo_3);
+        layer_ESRITopo_0;
+        map.addLayer(layer_ESRITopo_0);
+        map.createPane('pane_GoogleRoad_1');
+        map.getPane('pane_GoogleRoad_1').style.zIndex = 5;
+        var layer_GoogleRoad_1 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleRoad_1',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html"></a>',
+            minZoom: 8,
+            maxZoom: 18,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleRoad_1;
+        map.createPane('pane_GoogleHybrid_2');
+        map.getPane('pane_GoogleHybrid_2').style.zIndex = 6;
+        var layer_GoogleHybrid_2 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_2',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map Google</a>',
+            minZoom: 8,
+            maxZoom: 18,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleHybrid_2;
+        map.createPane('pane_DarkMatter_3');
+        map.getPane('pane_DarkMatter_3').style.zIndex = 7;
+        var layer_DarkMatter_3 = L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            pane: 'pane_DarkMatter_3',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">CartonDB</a>',
+            minZoom: 8,
+            maxZoom: 18,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_DarkMatter_3;
         function pop_Freguesia_4(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -179,7 +177,6 @@
         map.createPane('pane_Freguesia_4');
         map.getPane('pane_Freguesia_4').style.zIndex = 404;
         map.getPane('pane_Freguesia_4').style['mix-blend-mode'] = 'normal';
-        L.control.scale().addTo(map);
         var layer_Freguesia_4 = new L.geoJson(json_Freguesia_4, {
             attribution: '',
             interactive: true,
@@ -190,8 +187,7 @@
             style: style_Freguesia_4_0,
         });
         bounds_group.addLayer(layer_Freguesia_4);
-        map.addLayer(layer_Freguesia_4);
-        function pop_Closters_5(feature, layer) {
+        function pop_Clostersdealunos_5(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -218,45 +214,45 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Closters_5_0() {
+        function style_Clostersdealunos_5_0() {
             return {
-                pane: 'pane_Closters_5',
-                radius: 0.0,
+                pane: 'pane_Clostersdealunos_5',
+                radius: 8.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(0,0,0,0.391)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(196,60,57,1.0)',
+                fillColor: 'rgba(255,255,255,0.391)',
                 interactive: false,
             }
         }
-        map.createPane('pane_Closters_5');
-        map.getPane('pane_Closters_5').style.zIndex = 405;
-        map.getPane('pane_Closters_5').style['mix-blend-mode'] = 'normal';
-        var layer_Closters_5 = new L.geoJson(json_Closters_5, {
+        map.createPane('pane_Clostersdealunos_5');
+        map.getPane('pane_Clostersdealunos_5').style.zIndex = 405;
+        map.getPane('pane_Clostersdealunos_5').style['mix-blend-mode'] = 'normal';
+        var layer_Clostersdealunos_5 = new L.geoJson(json_Clostersdealunos_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Closters_5',
-            layerName: 'layer_Closters_5',
-            pane: 'pane_Closters_5',
-            onEachFeature: pop_Closters_5,
+            dataVar: 'json_Clostersdealunos_5',
+            layerName: 'layer_Clostersdealunos_5',
+            pane: 'pane_Clostersdealunos_5',
+            onEachFeature: pop_Clostersdealunos_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_Closters_5_0(feature));
+                return L.circleMarker(latlng, style_Clostersdealunos_5_0(feature));
             },
         });
-        var cluster_Closters_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+        var cluster_Clostersdealunos_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
             spiderfyDistanceMultiplier: 2});
-        cluster_Closters_5.addLayer(layer_Closters_5);
+        cluster_Clostersdealunos_5.addLayer(layer_Clostersdealunos_5);
 
-        bounds_group.addLayer(layer_Closters_5);
+        bounds_group.addLayer(layer_Clostersdealunos_5);
         function pop_Fluxos_6(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -286,8 +282,22 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Fluxos_6_0() {
-            return {
+        function style_Fluxos_6_0(feature) {
+            if (feature.properties['Total'] >= 1.000000 && feature.properties['Total'] <= 1.000000 ) {
+                return {
+                pane: 'pane_Fluxos_6',
+                opacity: 1,
+                color: 'rgba(84,176,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1,
+                fillOpacity: 0,
+                interactive: false,
+            }
+            }
+            if (feature.properties['Total'] >= 1.000000 && feature.properties['Total'] <= 5.000000 ) {
+                return {
                 pane: 'pane_Fluxos_6',
                 opacity: 1,
                 color: 'rgba(84,176,74,1.0)',
@@ -297,6 +307,20 @@
                 weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
+            }
+            }
+            if (feature.properties['Total'] >= 5.000000 && feature.properties['Total'] <= 21.000000 ) {
+                return {
+                pane: 'pane_Fluxos_6',
+                opacity: 1,
+                color: 'rgba(84,176,74,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
             }
         }
         map.createPane('pane_Fluxos_6');
@@ -341,22 +365,57 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Alunos_7_0() {
-            return {
+        function style_Alunos_7_0(feature) {
+            if (feature.properties['Total'] >= 1.000000 && feature.properties['Total'] <= 1.000000 ) {
+                return {
                 pane: 'pane_Alunos_7',
-                radius: 3.0,
+                radius: 4.0,
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(35,35,35,0.833)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(31,120,180,1.0)',
+                fillColor: 'rgba(247,251,255,0.833)',
                 interactive: false,
             }
+            }
+            if (feature.properties['Total'] >= 1.000000 && feature.properties['Total'] <= 5.000000 ) {
+                return {
+                pane: 'pane_Alunos_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.833)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,179,216,0.833)',
+                interactive: false,
+            }
+            }
+            if (feature.properties['Total'] >= 5.000000 && feature.properties['Total'] <= 21.000000 ) {
+                return {
+                pane: 'pane_Alunos_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,0.833)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(8,48,107,0.833)',
+                interactive: false,
+            }
+            }
         }
+        L.control.scale().addTo(map);
         map.createPane('pane_Alunos_7');
         map.getPane('pane_Alunos_7').style.zIndex = 407;
         map.getPane('pane_Alunos_7').style['mix-blend-mode'] = 'normal';
@@ -376,7 +435,7 @@
             },
         });
         bounds_group.addLayer(layer_Alunos_7);
-        function pop_Escolas_8(feature, layer) {
+        function pop_Agrupamentodeescolas_8(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -406,11 +465,13 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Escolas_8_0() {
-            return {
-                pane: 'pane_Escolas_8',
+        function style_Agrupamentodeescolas_8_0(feature) {
+            switch(String(feature.properties['Agrupamento'])) {
+                case 'Coimbra Centro':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
                 shape: 'triangle',
-                radius: 6.0,
+                radius: 8.000000000000002,
                 opacity: 1,
                 color: 'rgba(0,0,0,1.0)',
                 dashArray: '',
@@ -419,30 +480,134 @@
                 weight: 1.0,
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(225,90,99,1.0)',
+                fillColor: 'rgba(68,30,240,1.0)',
                 interactive: true,
             }
+                    break;
+                case 'Coimbra Oeste':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 8.000000000000002,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(110,229,31,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Coimbra Sul':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 7.199999999999999,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,232,171,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Eugénio de Castro':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 8.000000000000002,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(115,187,223,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Martim de Freitas':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 8.000000000000002,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,172,83,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rainha Santa Isabel':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 8.000000000000002,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(205,119,201,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Não Agrupada':
+                    return {
+                pane: 'pane_Agrupamentodeescolas_8',
+                shape: 'triangle',
+                radius: 8.000000000000002,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(231,106,118,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
         }
-        map.createPane('pane_Escolas_8');
-        map.getPane('pane_Escolas_8').style.zIndex = 408;
-        map.getPane('pane_Escolas_8').style['mix-blend-mode'] = 'normal';
-        var layer_Escolas_8 = new L.geoJson(json_Escolas_8, {
+        map.createPane('pane_Agrupamentodeescolas_8');
+        map.getPane('pane_Agrupamentodeescolas_8').style.zIndex = 408;
+        map.getPane('pane_Agrupamentodeescolas_8').style['mix-blend-mode'] = 'normal';
+        var layer_Agrupamentodeescolas_8 = new L.geoJson(json_Agrupamentodeescolas_8, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Escolas_8',
-            layerName: 'layer_Escolas_8',
-            pane: 'pane_Escolas_8',
-            onEachFeature: pop_Escolas_8,
+            dataVar: 'json_Agrupamentodeescolas_8',
+            layerName: 'layer_Agrupamentodeescolas_8',
+            pane: 'pane_Agrupamentodeescolas_8',
+            onEachFeature: pop_Agrupamentodeescolas_8,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_Escolas_8_0(feature));
+                return L.shapeMarker(latlng, style_Agrupamentodeescolas_8_0(feature));
             },
         });
-        bounds_group.addLayer(layer_Escolas_8);
-        map.addLayer(layer_Escolas_8);
+        bounds_group.addLayer(layer_Agrupamentodeescolas_8);
+        map.addLayer(layer_Agrupamentodeescolas_8);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -454,10 +619,10 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Escolas_8.png" /> Escolas': layer_Escolas_8,'<img src="legend/Alunos_7.png" /> Alunos': layer_Alunos_7,'<img src="legend/Fluxos_6.png" /> Fluxos': layer_Fluxos_6,'<img src="legend/Closters_5.png" /> Closters': cluster_Closters_5,'<img src="legend/Freguesia_4.png" /> Freguesia': layer_Freguesia_4,"ESRI Topo": layer_ESRITopo_3,"Google Road": layer_GoogleRoad_2,"Google Hybrid": layer_GoogleHybrid_1,"Dark Matter": layer_DarkMatter_0,}).addTo(map);
+        L.control.layers(baseMaps,{'Agrupamento de escolas<br /><table><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraCentro0.png" /></td><td>Coimbra Centro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraOeste1.png" /></td><td>Coimbra Oeste</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraSul2.png" /></td><td>Coimbra Sul</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_EugéniodeCastro3.png" /></td><td>Eugénio de Castro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_MartimdeFreitas4.png" /></td><td>Martim de Freitas</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_RainhaSantaIsabel5.png" /></td><td>Rainha Santa Isabel</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_NãoAgrupada6.png" /></td><td>Não Agrupada</td></tr></table>': layer_Agrupamentodeescolas_8,'Alunos<br /><table><tr><td style="text-align: center;"><img src="legend/Alunos_7_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_151.png" /></td><td>1 - 5</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_5212.png" /></td><td>5 - 21</td></tr></table>': layer_Alunos_7,'Fluxos<br /><table><tr><td style="text-align: center;"><img src="legend/Fluxos_6_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_151.png" /></td><td>1 - 5 </td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_5212.png" /></td><td>5 - 21 </td></tr></table>': layer_Fluxos_6,'<img src="legend/Clostersdealunos_5.png" /> Closters de alunos': cluster_Clostersdealunos_5,'<img src="legend/Freguesia_4.png" /> Freguesia': layer_Freguesia_4,"Dark Matter": layer_DarkMatter_3,"Google Hybrid": layer_GoogleHybrid_2,"Google Road": layer_GoogleRoad_1,"ESRI Topo": layer_ESRITopo_0,}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
-            layer: layer_Escolas_8,
+            layer: layer_Agrupamentodeescolas_8,
             initial: false,
             hideMarkerOnCollapse: true,
             propertyName: 'Escola'}));
@@ -472,7 +637,7 @@
         col1.className="col9";
         col1.id = "mapWindow";
         col1.style.height = "99%";
-        col1.style.width = "80%";
+        col1.style.width = "85%";
         col1.style.display = "inline-block";
         var col2 = document.createElement('div');
         col2.className="col3";
@@ -482,7 +647,7 @@
         document.getElementById("all").appendChild(col1);
         document.getElementById("all").appendChild(col2);
         col1.appendChild(mapDiv)
-        var Filters = {"Escola": "str","Agrupamento": "str","Nível": "str"};
+        var Filters = {"Escola": "str","Nível": "str","Agrupamento": "str"};
         function filterFunc() {
           map.eachLayer(function(lyr){
           if ("options" in lyr && "dataVar" in lyr["options"]){
@@ -665,11 +830,11 @@
             sel_Escola.innerHTML = Escola_options_str;
             div_Escola.appendChild(sel_Escola);
             var lab_Escola = document.createElement('div');
-            lab_Escola.innerHTML = 'Escolas';
+            lab_Escola.innerHTML = 'Selecionar Escola';
             lab_Escola.className = 'filterlabel';
             div_Escola.appendChild(lab_Escola);
             var reset_Escola = document.createElement('div');
-            reset_Escola.innerHTML = 'Limpar Filtro';
+            reset_Escola.innerHTML = 'Limpar filtro';
             reset_Escola.className = 'filterlabel';
             reset_Escola.onclick = function() {
                 var options = document.getElementById("sel_Escola").options;
@@ -679,6 +844,39 @@
                 filterFunc();
             };
             div_Escola.appendChild(reset_Escola);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Nvel = document.createElement('div');
+            div_Nvel.id = "div_Nvel";
+            div_Nvel.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Nvel);
+            sel_Nvel = document.createElement('select');
+            sel_Nvel.multiple = true;
+            sel_Nvel.size = 4;
+            sel_Nvel.id = "sel_Nvel";
+            var Nvel_options_str = "<option value='' unselected></option>";
+            sel_Nvel.onchange = function(){filterFunc()};
+            Nvel_options_str  += '<option value="1CEB">1CEB</option>';
+            Nvel_options_str  += '<option value="2,3CEB">2,3CEB</option>';
+            Nvel_options_str  += '<option value="ES">ES</option>';
+            Nvel_options_str  += '<option value="JI">JI</option>';
+            sel_Nvel.innerHTML = Nvel_options_str;
+            div_Nvel.appendChild(sel_Nvel);
+            var lab_Nvel = document.createElement('div');
+            lab_Nvel.innerHTML = 'Selecionar Nível';
+            lab_Nvel.className = 'filterlabel';
+            div_Nvel.appendChild(lab_Nvel);
+            var reset_Nvel = document.createElement('div');
+            reset_Nvel.innerHTML = 'Limpar filtro';
+            reset_Nvel.className = 'filterlabel';
+            reset_Nvel.onclick = function() {
+                var options = document.getElementById("sel_Nvel").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Nvel.appendChild(reset_Nvel);
             document.getElementById("menu").appendChild(
                 document.createElement("div"));
             var div_Agrupamento = document.createElement('div');
@@ -701,11 +899,11 @@
             sel_Agrupamento.innerHTML = Agrupamento_options_str;
             div_Agrupamento.appendChild(sel_Agrupamento);
             var lab_Agrupamento = document.createElement('div');
-            lab_Agrupamento.innerHTML = 'Agrupamentos';
+            lab_Agrupamento.innerHTML = 'Selecionar Agrupamento';
             lab_Agrupamento.className = 'filterlabel';
             div_Agrupamento.appendChild(lab_Agrupamento);
             var reset_Agrupamento = document.createElement('div');
-            reset_Agrupamento.innerHTML = 'Limpar Filtro';
+            reset_Agrupamento.innerHTML = 'Limpar filtro';
             reset_Agrupamento.className = 'filterlabel';
             reset_Agrupamento.onclick = function() {
                 var options = document.getElementById("sel_Agrupamento").options;
@@ -715,39 +913,6 @@
                 filterFunc();
             };
             div_Agrupamento.appendChild(reset_Agrupamento);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Nvel = document.createElement('div');
-            div_Nvel.id = "div_Nvel";
-            div_Nvel.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Nvel);
-            sel_Nvel = document.createElement('select');
-            sel_Nvel.multiple = true;
-            sel_Nvel.size = 4;
-            sel_Nvel.id = "sel_Nvel";
-            var Nvel_options_str = "<option value='' unselected></option>";
-            sel_Nvel.onchange = function(){filterFunc()};
-            Nvel_options_str  += '<option value="1CEB">1CEB</option>';
-            Nvel_options_str  += '<option value="2,3CEB">2,3CEB</option>';
-            Nvel_options_str  += '<option value="ES">ES</option>';
-            Nvel_options_str  += '<option value="JI">JI</option>';
-            sel_Nvel.innerHTML = Nvel_options_str;
-            div_Nvel.appendChild(sel_Nvel);
-            var lab_Nvel = document.createElement('div');
-            lab_Nvel.innerHTML = 'Nível de ensino';
-            lab_Nvel.className = 'filterlabel';
-            div_Nvel.appendChild(lab_Nvel);
-            var reset_Nvel = document.createElement('div');
-            reset_Nvel.innerHTML =  'Limpar Filtro';
-            reset_Nvel.className = 'filterlabel';
-            reset_Nvel.onclick = function() {
-                var options = document.getElementById("sel_Nvel").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Nvel.appendChild(reset_Nvel);
         </script>
     </body>
 </html>
