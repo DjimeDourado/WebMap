@@ -20,17 +20,24 @@
 }
 .filterselect{
   font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 0px;
-  margin-bottom: 50px;
-  
+  margin-left: 10px;  
 }
-#sel_Escola .filterselect{
-    height: 1300px;
+#sel_Escola, .filterselect select{
+    height: 400px;
     display: inline-flex;
     width: 100%;
+}
+#sel_Nvel, .filterselect select{
+  height: 90px;
+  display: inline-flex;
+  width: 100%;
+}
+#sel_Agrupamento, .filterselect select{
+  height: 140px;
+  display: inline-flex;
+  width: 100%;
 }
 .filterselect input, .filterselect select {
     height: 100px;
