@@ -62,12 +62,12 @@
 
             if (e.target.feature.geometry.type === 'Line') {
               highlightLayer.setStyle({
-                color: '#000000',
+                color: '#f5e502',
               });
             } else {
               highlightLayer.setStyle({
-                fillColor: '#000000',
-                fillOpacity: 10
+                fillColor: '#f5e502',
+                fillOpacity: 0.7
               });
             }
         }
@@ -619,7 +619,7 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Agrupamento de escolas<br /><table><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraCentro0.png" /></td><td>Coimbra Centro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraOeste1.png" /></td><td>Coimbra Oeste</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraSul2.png" /></td><td>Coimbra Sul</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_EugéniodeCastro3.png" /></td><td>Eugénio de Castro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_MartimdeFreitas4.png" /></td><td>Martim de Freitas</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_RainhaSantaIsabel5.png" /></td><td>Rainha Santa Isabel</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_NãoAgrupada6.png" /></td><td>Não Agrupada</td></tr></table>': layer_Agrupamentodeescolas_8,'Alunos<br /><table><tr><td style="text-align: center;"><img src="legend/Alunos_7_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_151.png" /></td><td>1 - 5</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_5212.png" /></td><td>5 - 21</td></tr></table>': layer_Alunos_7,'Fluxos<br /><table><tr><td style="text-align: center;"><img src="legend/Fluxos_6_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_151.png" /></td><td>1 - 5 </td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_5212.png" /></td><td>5 - 21 </td></tr></table>': layer_Fluxos_6,'<img src="legend/Clostersdealunos_5.png" /> Closters de alunos': cluster_Clostersdealunos_5,'<img src="legend/Freguesia_4.png" /> Freguesia': layer_Freguesia_4,"Dark Matter": layer_DarkMatter_3,"Google Hybrid": layer_GoogleHybrid_2,"Google Road": layer_GoogleRoad_1,"ESRI Topo": layer_ESRITopo_0,}).addTo(map);
+        L.control.layers(baseMaps,{'Agrupamento de escolas<br /><table><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraCentro0.png" /></td><td>Coimbra Centro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraOeste1.png" /></td><td>Coimbra Oeste</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_CoimbraSul2.png" /></td><td>Coimbra Sul</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_EugéniodeCastro3.png" /></td><td>Eugénio de Castro</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_MartimdeFreitas4.png" /></td><td>Martim de Freitas</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_RainhaSantaIsabel5.png" /></td><td>Rainha Santa Isabel</td></tr><tr><td style="text-align: center;"><img src="legend/Agrupamentodeescolas_8_NãoAgrupada6.png" /></td><td>Não Agrupada</td></tr></table>': layer_Agrupamentodeescolas_8,'Alunos<br /><table><tr><td style="text-align: center;"><img src="legend/Alunos_7_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_151.png" /></td><td>1 - 5</td></tr><tr><td style="text-align: center;"><img src="legend/Alunos_7_5212.png" /></td><td>5 - 21</td></tr></table>': layer_Alunos_7,'Fluxos<br /><table><tr><td style="text-align: center;"><img src="legend/Fluxos_6_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_151.png" /></td><td>1 - 5 </td></tr><tr><td style="text-align: center;"><img src="legend/Fluxos_6_5212.png" /></td><td>5 - 21 </td></tr></table>': layer_Fluxos_6,'<img src="legend/Clostersdealunos_5.png" /> Clusters de alunos': cluster_Clostersdealunos_5,'<img src="legend/Freguesia_4.png" /> Freguesia': layer_Freguesia_4,"Dark Matter": layer_DarkMatter_3,"Google Hybrid": layer_GoogleHybrid_2,"Google Road": layer_GoogleRoad_1,"ESRI Topo": layer_ESRITopo_0,}).addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: layer_Agrupamentodeescolas_8,
